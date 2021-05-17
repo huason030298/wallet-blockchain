@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "styles/menu.scss";
 import { NavLink } from "react-router-dom";
-import { MdDashboard } from "react-icons/md";
-import { RiRefund2Fill, RiSwapLine, RiHistoryLine } from "react-icons/ri";
-import { FiChevronDown } from "react-icons/fi";
-import { useLocation, useHistory } from "react-router-dom";
 import { VscExpandAll } from "react-icons/vsc";
 import { AiOutlineHistory, AiFillInfoCircle } from "react-icons/ai";
 import { FaEthereum } from "react-icons/fa";
+import { GiTwoCoins } from "react-icons/gi";
 
 export default function Menu() {
   return (
@@ -19,6 +16,13 @@ export default function Menu() {
           activeClassName="menu__navlink--active"
         >
           <VscExpandAll /> Create Wallet
+        </NavLink>
+        <NavLink
+          className="menu__navlink"
+          to="/mining"
+          activeClassName="menu__navlink--active"
+        >
+          <GiTwoCoins /> First Mining
         </NavLink>
         <NavLink
           className="menu__navlink"

@@ -1,15 +1,29 @@
 import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
+import http from "api/wallet";
+import * as moment from "moment";
 
 export default function TransactionsHistory() {
-  const [address, setAddress] = useState();
-  const getTransaction = () => {};
+  // const [address, setAddress] = useState();
+  const [histories, setHistories] = useState([]);
+  const getAllTransaction = async () => {
+    try {
+      const res = await http.getAllHitory();
+      const { status, data } = res;
+      if (status === 200) {
+        setHistories(data);
+      }
+    } catch (error) {
+      alert("Transactions History is Empty !");
+      throw error;
+    }
+  };
   return (
     <div className="history-container">
       <div className="container__header">
         <span>Transitions History</span>
       </div>
-      <div className="form__content form__content--row">
+      {/* <div className="form__content form__content--row">
         <label className="form__content__label form__content__label--row">
           My Address
         </label>
@@ -19,10 +33,10 @@ export default function TransactionsHistory() {
           onChange={(e) => setAddress(e.target.value)}
           className="form__content__input form__content__input--row"
         />
-      </div>
+      </div> */}
 
       <div className="history__btn">
-        <button onClick={getTransaction}>Get Transaction</button>
+        <button onClick={getAllTransaction}>Get All Transaction</button>
       </div>
       <Table striped bordered hover className="table">
         <thead>
@@ -35,45 +49,17 @@ export default function TransactionsHistory() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="col-hash">
-              0x1ac5db5c2bf02f2bbaae207ee9b884cf53c7e2213fd1393cfdc9b93365548ff4
-            </td>
-            <td className="col-age">10000 min ago</td>
-            <td className="col-from">
-              0x6850a0e5accebac765acfd78391421bfdb97c72b
-            </td>
-            <td className="col-to">
-              0x6850a0e5accebac765acfd78391421bfdb97c72c
-            </td>
-            <td className="col-val">10</td>
-          </tr>
-          <tr>
-            <td className="col-hash">
-              0x1ac5db5c2bf02f2bbaae207ee9b884cf53c7e2213fd1393cfdc9b93365548ff4
-            </td>
-            <td className="col-age">1 min ago</td>
-            <td className="col-from">
-              0x6850a0e5accebac765acfd78391421bfdb97c72b
-            </td>
-            <td className="col-to">
-              0x6850a0e5accebac765acfd78391421bfdb97c72c
-            </td>
-            <td className="col-val">10</td>
-          </tr>
-          <tr>
-            <td className="col-hash">
-              0x1ac5db5c2bf02f2bbaae207ee9b884cf53c7e2213fd1393cfdc9b93365548ff4
-            </td>
-            <td className="col-age">1 min ago</td>
-            <td className="col-from">
-              0x6850a0e5accebac765acfd78391421bfdb97c72b
-            </td>
-            <td className="col-to">
-              0x6850a0e5accebac765acfd78391421bfdb97c72c
-            </td>
-            <td className="col-val">10</td>
-          </tr>
+          {histories.map((history) => (
+            <tr>
+              <td className="col-hash">{history.TXID}</td>
+              <td className="col-time">
+                {moment(history.Timestamp * 1000).format("DD-MM-YYYY")}
+              </td>
+              <td className="col-from">{history.From}</td>
+              <td className="col-to">{history.To}</td>
+              <td className="col-amount">{history.Value}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </div>

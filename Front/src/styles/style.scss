@@ -113,17 +113,18 @@ body {
   }
 }
 
-.btn {
+.btn-active {
   cursor: pointer;
   font-size: 15px;
   width: 150px;
-  min-height: 20px;
+  min-height: 30px;
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
   background-color: #04ccaf;
+  color: #fff;
   margin-bottom: 10px;
 
   &.btn-disabled {
@@ -208,13 +209,14 @@ body {
       word-wrap: break-word;
     }
 
-    .col-age {
-      max-width: 100px;
+    .col-time {
+      max-width: 150px;
     }
 
     .col-from,
     .col-to {
       max-width: 420px;
+      word-wrap: break-word;
     }
   }
 }

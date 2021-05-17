@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import Rectangles from "components/Rectangles";
 import "styles/statistics.scss";
 import http from "api/wallet";
 
 export default function Statistics() {
   const [address, setAddress] = useState("");
-  const [balance, setBalance] = useState();
-  const submit = async () => {
+  const params = {
+    address: address,
+  };
+  const mining = async () => {
     try {
-      const res = await http.getBalanceAddress(address);
+      const res = await http.mining(params);
       const { status, data } = res;
       if (status === 200) {
-        setBalance(data.Balance);
+        alert(data.Result);
       }
     } catch (error) {
-      setBalance("");
       alert("Address not exist !");
       throw error;
     }
@@ -22,7 +22,7 @@ export default function Statistics() {
   return (
     <div className="account-container">
       <div className="container__header">
-        <span>Account Statistics</span>
+        <span>Mining Coins</span>
       </div>
       <div className="account-form">
         <div className="account-form__address">
@@ -37,10 +37,9 @@ export default function Statistics() {
           />
         </div>
       </div>
-      <button className="account__submit" onClick={submit}>
-        Submit
+      <button className="account__submit" onClick={mining}>
+        Mining
       </button>
-      <Rectangles address={address} balance={balance} />
     </div>
   );
 }

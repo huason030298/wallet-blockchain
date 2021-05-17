@@ -4,6 +4,7 @@ import CreateWallet from "views/CreateWallet";
 import TransactionsHistory from "views/TransactionsHistory";
 import NotFound from "views/NotFound";
 import SendCoins from "views/SendCoins";
+import MiningCoins from "views/MiningCoins";
 
 const routes = [
   {
@@ -28,6 +29,11 @@ const routes = [
     path: "/create-wallet",
     exact: true,
     component: CreateWallet,
+  },
+  {
+    path: "/mining",
+    exact: true,
+    component: MiningCoins,
   },
   {
     component: NotFound,
