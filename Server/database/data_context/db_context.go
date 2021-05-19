@@ -17,7 +17,7 @@ type singleton struct {
 var instance *singleton
 var mu sync.Mutex
 
-const DBContext = "mongodb+srv://blockchain:admin@cluster0.srmrg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const DBContext = "mongodb+srv://root:root@cluster0.10g9w.mongodb.net/moviebookingdb?authSource=admin&replicaSet=atlas-14hex6-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true"
 
 func GetInstance() *singleton {
 	if instance == nil {
